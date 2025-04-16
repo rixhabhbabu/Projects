@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manual Dice Roll</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; text-align: center; margin-top: 50px; }
+        .container { background: white; width: 400px; margin: auto; padding: 30px; border-radius: 15px; box-shadow: 0 0 10px rgba(0,0,0,0.2); }
+        button { padding: 10px 20px; font-size: 16px; margin: 10px; border-radius: 8px; cursor: pointer; }
+        .p1 { background-color: #007bff; color: white; }
+        .p2 { background-color: #28a745; color: white; }
+        .reset { background-color: red; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎲 Dice Game - Manual Turn</h1>
+
+        <p><strong>Player 1 Rolls:</strong> {{ rolls_p1 }}</p>
+        <p><strong>Player 2 Rolls:</strong> {{ rolls_p2 }}</p>
+
+        <h2>Player 1 Score: {{ score1 }}</h2>
+        <h2>Player 2 Score: {{ score2 }}</h2>
+
+        {% if result %}
+            <h2>{{ result }}</h2>
+        {% else %}
+            {% if turn == 'player1' %}
+                <a href="{{ url_for('roll', player='player1') }}"><button class="p1">Player 1 Roll</button></a>
+            {% elif turn == 'player2' %}
+                <a href="{{ url_for('roll', player='player2') }}"><button class="p2">Player 2 Roll</button></a>
+            {% endif %}
+        {% endif %}
+
+        <br>
+        <a href="{{ url_for('reset') }}"><button class="reset">🔄 Reset Game</button></a>
+    </div>
+</body>
+</html>
